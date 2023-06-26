@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{% static 'zvit/css/styles.css' %}">
+    <title>Title</title>
+</head>
+<body>
+
+  <div class="container">
+      <form id="contact" action="" method="post">
+          {% csrf_token %}
+        <h3>Quick Contact</h3>
+        <h4>Contact us today, and get reply with in 24 hours!</h4>
+          {% if messages %}
+            {% for i in messages %}
+                {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="message-status success-message">
+                        <a href="{{i}}" target="_blank">
+                            Згенерований звіт
+                        </a>
+                    </div>
+                {% elif i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="message-status success-message">
+                        <a href="{{i}}" target="_blank">
+                            Згенерований звіт
+                        </a>
+                    </div>
+                {% else %}
+                     <div class="message-status">
+                        <p>
+                            {{ i }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <fieldset>
+          {{ form.title }}
+        </fieldset>
+        <fieldset>
+          {{ form.date }}
+        </fieldset>
+        <fieldset>
+          {{ form.executor }}
+        </fieldset>
+        <fieldset>
+          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+</body>
+</html>
